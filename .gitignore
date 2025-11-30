@@ -40,4 +40,8 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# CRYPTOGRAPHIC SOVEREIGNTY - NEVER COMMIT
+scripts/caleon_cipher.py
+# Add any future cryptographic organs here
 >>>>>>> d6b8e21 (feat: complete Caleon non-LLM AI stack with CI/CD)

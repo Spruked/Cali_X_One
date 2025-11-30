@@ -74,7 +74,7 @@ caleon/
 - `seed-linter.py`: Validate vault integrity
 - `ethics-simulator.py`: Dry-run decisions through seeds
 - `package-vault.py`: Build .svbin binary packages
-- `caleon_cipher.py`: Quantum-safe file encryption (ChaCha20 + Keccak + Module-LWE KEM)
+- `caleon_cipher.py`: **PRIVATE** - Quantum-safe cryptographic organ (not in repo)
 
 ## License
 
