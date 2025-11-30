@@ -1,0 +1,59 @@
+version: "3.9"
+vault-ro: &vault-ro
+  - ./seed_vault:/app/seed_vault:ro
+services:
+  cochlear:
+    build: ./services/cochlear-processor
+    env_file: .env
+    volumes:
+      - ./seed_vault:/app/seed_vault:ro
+      - ./runtime:/app/runtime
+    networks:
+      - caleon
+
+  resonator:
+    build: ./services/resonator-pyramid
+    depends_on: [cochlear]
+    volumes: *vault-ro
+    networks:
+      - caleon
+
+  anterior:
+    build: ./services/anterior-helix
+    ports: ["8001:8001"]
+    volumes: *vault-ro
+    networks:
+      - caleon
+
+  posterior:
+    build: ./services/posterior-helix
+    ports: ["8005:8005"]
+    volumes: *vault-ro
+    networks:
+      - caleon
+
+  gyro:
+    build: ./services/gyro-harmonizer
+    ports: ["8090:8090"]
+    volumes: *vault-ro
+    networks:
+      - caleon
+
+  phonatory:
+    build: ./services/phonatory-output
+    devices:
+      - /dev/snd:/dev/snd
+    volumes: *vault-ro
+    networks:
+      - caleon
+
+  vault-watch:
+    image: hashicorp/consul-template
+    volumes: *vault-ro
+    command: -template "/app/seed_vault/index.json.ctmpl:/app/runtime/vault-reload.log" -exec "pkill -HUP seed-loader"
+    networks:
+      - caleon
+
+networks:
+  caleon:
+    driver: bridge

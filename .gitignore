@@ -12,16 +12,32 @@ __pycache__/
 *.egg-info/
 venv/
 .env
+.env.local
 
 # Helm / K8s
 *.tgz
 charts/*.lock
+caleon-helm/charts/
+
+# Docker
+.dockerignore
 
 # OS
 .DS_Store
 Thumbs.db
+*.tmp
 
 # IDE
 .vscode/
 .idea/
 *.swp
+*.swo
+
+# Git
+.git/
+*.orig
+
+# Logs
+*.log
+logs/
+>>>>>>> d6b8e21 (feat: complete Caleon non-LLM AI stack with CI/CD)
