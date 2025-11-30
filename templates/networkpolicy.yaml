@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "caleon.fullname" . }}
+spec:
+  podSelector:
+    matchLabels: {{- include "caleon.selectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - port: 8001  # anterior
+        - port: 8005  # posterior
+        - port: 8090  # gyro
+        - port: 8086  # phonatory
+  egress:
+    - {}

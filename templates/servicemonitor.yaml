@@ -1,0 +1,31 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "caleon.fullname" . }}-metrics
+  labels:
+    {{- include "caleon.labels" . | nindent 4 }}
+    app.kubernetes.io/component: metrics
+spec:
+  selector:
+    {{- include "caleon.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "caleon.fullname" . }}
+  labels:
+    {{- include "caleon.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "caleon.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+{{- end }}

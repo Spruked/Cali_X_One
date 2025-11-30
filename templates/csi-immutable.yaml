@@ -1,0 +1,38 @@
+{{- if .Values.csiImmutable.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "caleon.fullname" . }}-vault
+spec:
+  accessModes: [ReadOnlyMany]
+  storageClassName: csi-immutable
+  resources:
+    requests:
+      storage: {{ .Values.csiImmutable.size }}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "caleon.fullname" . }}-vault-loader
+  annotations:
+    csi.driver: secrets-store.csi.x-k8s.io
+spec:
+  containers:
+    - name: loader
+      image: busybox:1.36
+      command: ["sh", "-c", "cp -r /vault/* /shared/ && chmod 0444 /shared/*"]
+      volumeMounts:
+        - name: vault-src
+          mountPath: /vault
+        - name: shared
+          mountPath: /shared
+  volumes:
+    - name: vault-src
+      csi:
+        driver: secrets-store.csi.x-k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: caleon-vault
+    - name: shared
+      emptyDir: {}
+{{- end }}

@@ -1,0 +1,27 @@
+# --------------------  CALEON .gitignore  --------------------
+# runtime artefacts
+runtime/reflections/*
+runtime/glyphs/*
+runtime/audit/*.log
+*.wav
+*.svbin
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.env
+
+# Helm / K8s
+*.tgz
+charts/*.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,52 @@
+replicaCount: 1
+
+image:
+  registry: ghcr.io/your-org
+  tag: "1.1.0"
+  pullPolicy: IfNotPresent
+
+seedVault:
+  checksum: "sha256:ea08..."   # linted at helm install time
+  mutable: false
+
+service:
+  type: ClusterIP
+  ports:
+    anterior: 8001
+    posterior: 8005
+    gyro: 8090
+    phonatory: 8086
+
+ingress:
+  enabled: true
+  className: nginx
+  host: caleon.local
+  tls: true
+
+security:
+  runAsNonRoot: true
+  runAsUser: 65534
+  fsGroup: 65534
+  readOnlyRootFilesystem: true
+
+metrics:
+  enabled: true
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+csiImmutable:
+  enabled: false        # flip to true if ConfigMap >1 MiB
+  size: 50Mi
+
+gatekeeper:
+  enabled: false        # requires Gatekeeper controller cluster-wide
+
+resources:
+  cochlear:   { requests: { cpu: "100m", memory: "128Mi" } }
+  resonator:  { requests: { cpu: "200m", memory: "256Mi" } }
+  anterior:   { requests: { cpu: "150m", memory: "192Mi" } }
+  posterior:  { requests: { cpu: "200m", memory: "256Mi" } }
+  gyro:       { requests: { cpu: "250m", memory: "320Mi" } }
+  phonatory:  { requests: { cpu: "300m", memory: "512Mi" } }

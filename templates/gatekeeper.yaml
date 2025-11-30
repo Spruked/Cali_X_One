@@ -1,0 +1,31 @@
+{{- if .Values.gatekeeper.enabled }}
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: caleon-image-must-be-signed
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+    namespaces: ["{{ .Release.Namespace }}"]
+  parameters:
+    labels:
+      - key: caleon.image/signed
+        allowedRegex: "^true$"
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: caleon-default-network-policy
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces: ["{{ .Release.Namespace }}"]
+  location: "metadata.annotations.network-policy"
+  parameters:
+    assign:
+      value: "required"
+{{- end }}

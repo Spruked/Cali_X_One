@@ -1,0 +1,25 @@
+# normal install
+helm install caleon ./caleon-helm
+
+# with HA + monitoring + CSI immutable vault
+helm upgrade caleon ./caleon-helm \
+  --set metrics.enabled=true \
+  --set podDisruptionBudget.enabled=true \
+  --set csiImmutable.enabled=true \
+  --set gatekeeper.enabled=true
+
+# 1. all pods ready
+kubectl -n caleon get pods
+
+# 2. ServiceMonitor discovered
+kubectl -n monitoring get servicemonitor | grep caleon
+
+# 3. PDB in force
+kubectl -n caleon get pdb
+
+# 4. images signed (gatekeeper)
+kubectl -n caleon describe deployment caleon-anterior | grep caleon.image/signed
+
+# 5. ethics trace still works
+kubectl -n caleon exec deploy/caleon-posterior -c posterior -- \
+  python -m caleon.ethics_sim --action "deploy helm chart" --agent AI --affected cluster

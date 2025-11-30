@@ -1,0 +1,13 @@
+apiVersion: v2
+name: caleon
+description: Non-LLM ethically-grounded AI stack with seed-vault reasoning
+type: application
+version: 1.1.0
+appVersion: "ics-v2-2025-10-18"
+keywords: [ai, ethics, seed-vault, non-llm, philosophy]
+home: https://github.com/your-org/caleon
+sources:
+  - https://github.com/your-org/caleon
+maintainers:
+  - name: Bryan A. Spruk
+    email: bryan@spruk.io
