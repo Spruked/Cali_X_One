@@ -1,5 +1,28 @@
 version: "3.9"
 services:
+  # Enhanced Cali X One Core with SKG Intelligence
+  cali-x-one:
+    build: .
+    ports: 
+      - "8003:8003"  # Main service
+      - "8004:8004"  # SKG service
+    environment:
+      - PYTHONPATH=/app:/app/skg-core
+      - SKG_DB_PATH=/app/data/skg.db
+      - CALEON_ENV=production
+    volumes:
+      - ./seed_vault:/app/seed_vault:ro
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - caleon
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
   cochlear:
     build: ./services/cochlear-processor
     env_file: .env
@@ -8,10 +31,14 @@ services:
       - ./runtime:/app/runtime
     networks:
       - caleon
+    depends_on:
+      - cali-x-one
 
   resonator:
     build: ./services/resonator-pyramid
-    depends_on: [cochlear]
+    depends_on: 
+      - cochlear
+      - cali-x-one
     volumes:
       - ./seed_vault:/app/seed_vault:ro
     networks:
@@ -24,6 +51,8 @@ services:
       - ./seed_vault:/app/seed_vault:ro
     networks:
       - caleon
+    depends_on:
+      - cali-x-one
 
   posterior:
     build: ./services/posterior-helix
@@ -32,6 +61,8 @@ services:
       - ./seed_vault:/app/seed_vault:ro
     networks:
       - caleon
+    depends_on:
+      - cali-x-one
 
   gyro:
     build: ./services/gyro-harmonizer
