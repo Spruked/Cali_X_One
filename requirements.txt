@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pyttsx3
+SpeechRecognition
+PyAudio
+pydub

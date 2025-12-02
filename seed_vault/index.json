@@ -33,7 +33,8 @@
       "id": "ethics",
       "files": [
         "ethics/seed_proverbs.json",
-        "ethics/seed_hedonic_reflex.json"
+        "ethics/seed_hedonic_reflex.json",
+        "ethics/lattice_encryption_rule.json"
       ]
     },
     {

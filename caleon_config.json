@@ -1,0 +1,6 @@
+{
+  "wake_word": "caleon",
+  "mute_hotkey": "ctrl+shift+m",
+  "voice": true,
+  "sentinel": true
+}
