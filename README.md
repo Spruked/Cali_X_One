@@ -217,6 +217,16 @@ results = kb.query([None, 'manages', None])
 
 ## 🔧 **Installation & Setup**
 
+### **Environment Configuration**
+
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit .env with your configuration
+# Required: SECRET_KEY, JWT_SECRET_KEY, VAULT_ENCRYPTION_KEY
+```
+
 ### **Docker Deployment (Recommended)**
 
 ```bash
@@ -224,12 +234,12 @@ results = kb.query([None, 'manages', None])
 git clone https://github.com/Spruked/Cali_X_One.git
 cd Cali_X_One
 
-# Launch complete stack
+# Launch complete stack with vault
 docker-compose up -d
 
 # Verify deployment
 curl http://localhost:8003/health
-curl http://localhost:8004/query?pat=[null,null,null]
+curl http://localhost:8003/vault/health
 ```
 
 ### **Local Development**
@@ -239,26 +249,59 @@ curl http://localhost:8004/query?pat=[null,null,null]
 python -m venv .venv
 .venv\Scripts\activate  # On Windows
 
-# Install dependencies
+# Install dependencies (includes security updates)
 pip install -r requirements.txt
-
-# Install additional async database support
-pip install aiosqlite>=0.19.0
 
 # Install SKG core
 cd skg-core && pip install -e . && cd ..
 
-# Run development server
+# Run main server
 python run_server.py
+
+# In separate terminals, run workers:
+python workers/josephine.py
+python workers/bubble_worker.py
+```
+
+### **Browser Extension Setup**
+
+```bash
+# Load extension in Chrome:
+# 1. Open chrome://extensions/
+# 2. Enable "Developer mode"
+# 3. Click "Load unpacked"
+# 4. Select the browser-extension/ folder
+
+# Or install from zip:
+# Unzip ucm-bubble-extension.zip and load as unpacked extension
 ```
 
 ### **Prerequisites**
 
 - Python 3.11+
 - SQLite3 (built-in with Python)
-- Async SQLAlchemy support (aiosqlite)
 - Docker & Docker Compose (for containerized deployment)
+- Chrome/Firefox (for browser extension)
 - CUDA (optional, for GPU acceleration)
+
+## 🔒 **Security & Production Features**
+
+### **Rate Limiting & CORS**
+- **Rate limiting**: 60 requests/minute (configurable)
+- **CORS**: Restricted to browser extension origins only
+- **Environment variables**: All secrets loaded from `.env`
+
+### **Worker System**
+- **Josephine**: DMN coordinator for predicate invention
+- **Bubble Worker**: UI streaming and CLI relay
+- **Registry API**: `/api/workers/` for worker management
+- **Heartbeat monitoring**: Automatic worker health tracking
+
+### **Vault Integration**
+- **AES-256 encryption**: Secure knowledge storage
+- **Glyph trace expansion**: Reasoning auditability
+- **Self-repair protocols**: System resilience
+- **Dual-core integration**: Cognitive architecture backup
 
 ## 💡 **Usage Examples**
 
