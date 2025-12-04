@@ -1,13 +1,89 @@
-MIT License
+# Custom License for Cali X One Super-Knowledge Graph AGI System
 
-Copyright (c) 2025 Bryan A. Spruk
+**Copyright (c) 2025 Bryan Spruyt, Spruked Technologies**  
+**All Rights Reserved.**
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## NOTICE OF PROPRIETARY TECHNOLOGY
+
+This software contains proprietary and confidential technology, including but not limited to:
+
+1. **Recursive Super-Knowledge Graph Architecture**
+2. **Autonomous Predicate Invention Algorithms** 
+3. **AGI Curiosity Daemon Systems**
+4. **Cross-Domain Abstract Reasoning Frameworks**
+5. **Bootstrap Cascade Intelligence Emergence**
+
+**PATENT PENDING**: Multiple patent applications are being filed for the core innovations contained within this system.
+
+## PERMITTED USES
+
+### Educational and Research Use
+
+Permission is hereby granted to accredited educational institutions and non-profit research organizations to use this software for:
+
+- Academic research and study
+- Educational course materials and assignments  
+- Non-commercial scientific research
+- Personal learning and experimentation
+
+**Conditions for Educational Use**:
+1. Proper attribution must be provided in all uses
+2. No commercial exploitation or productization
+3. Source code modifications must be shared with original authors
+4. Publications using this technology must cite the original work
+
+### Attribution Requirements
+
+All permitted uses must include the following attribution:
+
+```
+This work uses Cali X One Super-Knowledge Graph AGI System
+Copyright (c) 2025 Bryan Spruyt, Spruked Technologies
+Original implementation of Alexander Warren London's 2025 Super-Knowledge Graphs paper
+Patent Pending Technology - Used under educational license
+```
+
+## RESTRICTED USES REQUIRING COMMERCIAL LICENSE
+
+The following uses are **STRICTLY PROHIBITED** without explicit written commercial license:
+
+### Commercial Exploitation
+- Integration into commercial software products
+- Software-as-a-Service (SaaS) deployments
+- Consulting services using this technology
+- White-label solutions and OEM implementations
+- Revenue-generating applications or services
+
+### Derivative Works  
+- Creating commercial products based on this technology
+- Developing competing AGI or knowledge graph systems
+- Reverse engineering for commercial purposes
+- Patent circumvention attempts
+
+### Distribution and Redistribution
+- Selling, licensing, or sublicensing this software
+- Including this technology in commercial software packages
+- Cloud service deployments for external users
+- API services offering this functionality
+
+## COMMERCIAL LICENSING
+
+For commercial licensing inquiries, contact:
+
+**Business Development**: bryan@spruked.com  
+**Legal Department**: legal@spruked.com  
+
+## DISCLAIMERS AND LIABILITY
+
+### No Warranty
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+### Limitation of Liability
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**By using this software, you acknowledge that you have read, understood, and agree to be bound by the terms of this license.**
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.

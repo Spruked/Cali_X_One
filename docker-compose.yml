@@ -5,7 +5,6 @@ services:
     build: .
     ports: 
       - "8003:8003"  # Main service
-      - "8004:8004"  # SKG service
     environment:
       - PYTHONPATH=/app:/app/skg-core
       - SKG_DB_PATH=/app/data/skg.db
@@ -22,6 +21,30 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
+    command: ["python", "-m", "uvicorn", "iss_module.api.api:app", "--host", "0.0.0.0", "--port", "8003"]
+
+  # SKG API Service for direct knowledge graph operations
+  skg-service:
+    build: .
+    ports:
+      - "8004:8004"  # SKG service
+    environment:
+      - PYTHONPATH=/app:/app/skg-core
+      - SKG_DB_PATH=/app/data/skg.db
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - caleon
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    command: ["python", "/app/skg-core/skg_api.py"]
+    depends_on:
+      - cali-x-one
 
   cochlear:
     build: ./services/cochlear-processor
@@ -81,19 +104,38 @@ services:
     networks:
       - caleon
 
+  # Advanced Vault System - Consciousness Framework
+  vault-system:
+    build: ./vault_system
+    ports:
+      - "8002:8002"  # Vault system API
+      - "8001:8001"  # Telemetry dashboard
+    environment:
+      - PYTHONPATH=/app
+      - VAULT_MASTER_KEY=master_key_2024
+      - VAULT_NODE_ID=advanced_vault
+    volumes:
+      - ./vault_system:/app/vault_system
+      - ./seed_vault:/app/seed_vault:ro
+      - ./runtime:/app/runtime
+      - ./logs:/app/logs
+    networks:
+      - caleon
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    command: ["python", "main.py"]
+    depends_on:
+      - cali-x-one
+
   vault-watch:
     image: hashicorp/consul-template
     volumes:
       - ./seed_vault:/app/seed_vault:ro
     command: -template "/app/seed_vault/index.json.ctmpl:/app/runtime/vault-reload.log" -exec "pkill -HUP seed-loader"
-    networks:
-      - caleon
-
-  dals:
-    build: .
-    ports: ["8003:8003"]
-    volumes:
-      - ./iss_module/cali_x_one:/app/iss_module/cali_x_one
     networks:
       - caleon
 
