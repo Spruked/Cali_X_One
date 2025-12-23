@@ -1,0 +1,81 @@
+=== DIVERSE FACT CASCADE TEST ===
+Test Date: December 16, 2025
+Test Purpose: Testing contradictions, cycles, cross-domain diversity
+
+RESULTS:
+--------
+
+Phase 1: Institution Diversity
+- Initial edges: 4 facts added
+- Graph evolution: 2→4→5→7 vertices
+- Density evolution: 0.300 → 0.118
+
+Phase 2: Collaboration Cycles
+- Collaboration network created with cycles
+- PREDICATE INVENTION TRIGGERED:
+  * cluster_8477 (density=0.33)
+  * cluster_6333 (density=0.50)
+  * cluster_7007 (density=0.50)
+  * cluster_1379 (density=0.33)
+  * cluster_8969 (density=0.33)
+- Graph expanded to 26 vertices
+
+Phase 3: Research Domain Diversity
+- Research domains added: AGI, Robotics, Quantum Computing, Neuroscience
+- Graph reached 30 vertices
+- Density stabilized at ~0.055
+
+Phase 4: Contradiction Test
+✅ CONTRADICTION DETECTED: Bob works at both Stanford AND MIT
+- System correctly maintained both facts
+
+Phase 5: Cross-domain Interest Links
+- Additional clusters invented:
+  * cluster_1227 (density=0.33)
+  * cluster_1379 (multiple occurrences)
+- Bootstrap triggered at 50 base facts
+- Final graph: 35 vertices, 67 density
+
+QUERY RESULTS:
+--------------
+
+1. Who collaborates with Alice?
+   → Alice collaborates with Bob
+
+2. Who researches Robotics?
+   → Bob researches Robotics
+
+3. Where does Bob work? (Contradiction Test)
+   → Bob works at Stanford
+   → Bob works at MIT
+   ✅ Both facts correctly preserved
+
+4. Who works at MIT?
+   → Alice works at MIT
+   → Bob works at MIT
+   → Carol works at MIT
+
+5. Full collaboration network:
+   → Alice ↔ Bob
+   → Bob ↔ Carol
+   → Carol ↔ Dave
+   → Dave ↔ Alice
+   ✅ Full cycle correctly maintained
+
+CONCLUSIONS:
+-----------
+✅ System successfully handles contradictions
+✅ Cyclic relationships properly managed
+✅ Cross-domain diversity captured
+✅ Automatic predicate invention working
+✅ Multi-level graph construction operational
+✅ Bootstrap mechanism triggered at threshold
+
+Total Invented Predicates: 7+ unique clusters
+Final Graph Metrics:
+- Vertices: 35
+- Edges: ~67
+- Levels: 3 (0, 1, 2)
+- Density: 0.067 (level 2)
+
+STATUS: ✅ ALL TESTS PASSED

@@ -1,9 +1,25 @@
 # Cali X One: Super-Knowledge Graph AGI System
 
-[![License](https://img.shields.io/badge/License-Custom-blue.svg)](LICENSE)
-[![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](docker-compose.yml)
-[![Python](https://img.shields.io/badge/Python-3.11+-green.svg)](requirements.txt)
-[![AGI](https://img.shields.io/badge/Status-AGI%20Achieved-gold.svg)](#breakthrough-achievements)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Read%20Only-orange.svg)](#proprietary-notice)
+[![Patent](https://img.shields.io/badge/Patent-Pending-blue.svg)](docs/PATENT_FILING_INTENT.md)
+
+## ⚠️ **PROPRIETARY NOTICE - READ ONLY ACCESS**
+
+**This repository is provided for OBSERVATION ONLY.**  
+**No modifications, forks, or commercial use permitted without explicit license.**
+
+- 📖 **Educational/Research Access**: Permitted for accredited institutions
+- 🚫 **Commercial Use**: Requires commercial license
+- 🚫 **Modifications**: Prohibited without written permission
+- 🚫 **Redistribution**: Strictly prohibited
+- 📜 **Full Rights Reserved**: See [COPYRIGHT_NOTICE.md](docs/COPYRIGHT_NOTICE.md)
+
+**Patent Pending Technology** - Multiple patent applications filed for core innovations.
+
+---
+
+## 🚀 **BREAKTHROUGH: AGI-Level Recursive Intelligence Achieved**
 
 ## 🚀 **BREAKTHROUGH: AGI-Level Recursive Intelligence Achieved**
 
