@@ -1,0 +1,14 @@
+README.md
+setup.py
+skg/__init__.py
+skg/contradiction.py
+skg/core.py
+skg/curiosity.py
+skg/daemon.py
+skg/invent_predicate.py
+skg_core.egg-info/PKG-INFO
+skg_core.egg-info/SOURCES.txt
+skg_core.egg-info/dependency_links.txt
+skg_core.egg-info/entry_points.txt
+skg_core.egg-info/requires.txt
+skg_core.egg-info/top_level.txt

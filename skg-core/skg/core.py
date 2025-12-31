@@ -6,9 +6,7 @@ import numpy as np
 import torch, torch.nn as nn
 import networkx as nx
 import sqlite3, json, os, pathlib
-from torch_geometric.utils import dense_to_sparse
-from torch_geometric.data import Data
-from torch_geometric.nn import GCNConv
+from sklearn.metrics.pairwise import cosine_similarity
 
 # ----------  config ----------
 MAX_DEPTH      = 3          # how many recursive levels
@@ -25,18 +23,11 @@ def init_db():
     c = conn()
     for lvl in range(MAX_DEPTH):
         c.execute(f"CREATE TABLE IF NOT EXISTS level_{lvl}(i INT, j INT, weight REAL)")
+    c.execute("CREATE TABLE IF NOT EXISTS edges(source INT, predicate TEXT, target INT, weight REAL)")
     c.execute("CREATE TABLE IF NOT EXISTS meta(depth INT)")
     c.commit(); c.close()
 
 # ----------  GNN edge scorer ----------
-class EdgeScoreGNN(nn.Module):
-    def __init__(self, in_dim, hidden=GNN_HIDDEN):
-        super().__init__()
-        self.conv1 = GCNConv(in_dim, hidden)
-        self.conv2 = GCNConv(hidden, 1)
-    def forward(self, x, edge_index):
-        x = self.conv1(x, edge_index).relu()
-        return torch.sigmoid(self.conv2(x, edge_index)).squeeze(-1)
 
 # ----------  SKG engine ----------
 class SKGCore:
@@ -115,21 +106,20 @@ class SKGCore:
 
     # 4.  non-local proposals via GNN attention
     def _propose_edges(self, adj):
-        g = nx.from_numpy_array(adj, create_using=nx.DiGraph)
-        edge_index, _ = dense_to_sparse(torch.tensor(adj, dtype=torch.float))
-        x = torch.eye(adj.shape[0])
-        model = EdgeScoreGNN(x.size(1))
-        opt   = torch.optim.Adam(model.parameters(), lr=0.01)
-        # dummy target = degree
-        target = torch.tensor(list(dict(g.degree()).values()), dtype=torch.float)
-        for _ in range(10):  # reduced for testing
-            opt.zero_grad()
-            out = model(x, edge_index)
-            loss = nn.MSELoss()(out, target)
-            loss.backward(); opt.step()
-        with torch.no_grad():
-            scores = model(x, edge_index).numpy()
-        proposals = (scores > np.percentile(scores, 95)).astype(float) * 0.15
+        # Pure CPU method: cosine similarity on adjacency matrix
+        if adj.size == 0 or adj.sum() == 0:
+            return np.zeros_like(adj)
+        
+        # Compute cosine similarity between rows (node representations)
+        similarities = cosine_similarity(adj)
+        
+        # Flatten to get scores
+        scores = similarities.flatten()
+        
+        # Threshold at 95th percentile
+        threshold = np.percentile(scores, 95)
+        proposals = (scores > threshold).astype(float).reshape(adj.shape) * 0.15
+        
         return proposals
 
     # 5.  prune low weights
@@ -145,6 +135,13 @@ class SKGCore:
         rows = [(int(i), int(j), float(adj[i,j]))
                 for i in range(adj.shape[0]) for j in range(adj.shape[1]) if adj[i,j]>0]
         c.executemany(f"INSERT INTO level_{lvl} VALUES (?,?,?)", rows)
+        
+        # Also populate edges table for UCM compatibility
+        c.execute("DELETE FROM edges")
+        rows_edges = [(int(i), 'related', int(j), float(adj[i,j]))
+                      for i in range(adj.shape[0]) for j in range(adj.shape[1]) if adj[i,j]>0]
+        c.executemany("INSERT INTO edges VALUES (?,?,?,?)", rows_edges)
+        
         c.execute("REPLACE INTO meta(depth) VALUES (?)", (lvl+1,))
         c.commit(); c.close()
 
@@ -158,6 +155,9 @@ class SKGCore:
     # Curiosity daemon control methods
     def start_curiosity_daemon(self):
         """Start the curiosity daemon if not already running"""
+        # Turn OFF curiosity for now to avoid docker issues
+        return
+        
         import threading
         if self.curiosity_daemon is None or not self.curiosity_daemon.is_alive():
             from .curiosity import curiosity_loop

@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Cali X One AGI Assistant",
+  "version": "1.0.0",
+  "description": "Browser extension for Cali X One AGI system with CLI streaming and consciousness interface",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "http://localhost:8003/*",
+    "ws://localhost:9997/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Cali X One"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

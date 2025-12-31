@@ -1,0 +1,78 @@
+/* Cali X One Browser Extension Styles */
+
+#cali-bubble {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 25px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  color: white;
+  min-width: 200px;
+  cursor: move;
+}
+
+.cali-bubble-content {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  justify-content: space-between;
+}
+
+.cali-header {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.cali-status {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.cali-toggle {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.cali-toggle:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.cali-panel {
+  background: white;
+  color: #333;
+  border-radius: 0 0 15px 15px;
+  padding: 15px;
+  max-width: 300px;
+}
+
+.cali-input {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+
+.cali-output {
+  max-height: 150px;
+  overflow-y: auto;
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+}

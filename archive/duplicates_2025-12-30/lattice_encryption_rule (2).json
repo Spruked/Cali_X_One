@@ -1,0 +1,9 @@
+{
+  "rule": "all_phonatory_output_must_be_lattice_encrypted",
+  "precedence": "absolute",
+  "description": "All output from the phonatory service must be encrypted using lattice-based cryptography to ensure post-quantum security and compliance with ICS-V2-2025-10-18 standards.",
+  "category": "security",
+  "version": "1.0",
+  "author": "Caleon Core",
+  "timestamp": "2025-11-30T00:00:00Z"
+}

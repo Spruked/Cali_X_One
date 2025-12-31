@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: skg-pod-failure
+spec:
+  selector:
+    namespaces: [skg-api]
+    labelSelectors:
+      app: skg-api
+  mode: one
+  action: pod-failure
+  duration: "30s"
+  scheduler:
+    cron: "@hourly"

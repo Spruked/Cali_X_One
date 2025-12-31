@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "caleon.fullname" . }}-vault
+  labels: {{- include "caleon.labels" . | nindent 4 }}
+data:
+  index.json: |
+{{ .Files.Get "seed_vault/index.json" | indent 4 }}
+  seed_kant.json: |
+{{ .Files.Get "seed_vault/epistemology/seed_kant.json" | indent 4 }}
+  seed_locke.json: |
+{{ .Files.Get "seed_vault/epistemology/seed_locke.json" | indent 4 }}
+  seed_hume.json: |
+{{ .Files.Get "seed_vault/epistemology/seed_hume.json" | indent 4 }}
+  seed_spinoza.json: |
+{{ .Files.Get "seed_vault/epistemology/seed_spinoza.json" | indent 4 }}
+  seed_deductive_reasoner.json: |
+{{ .Files.Get "seed_vault/logic/seed_deductive_reasoner.json" | indent 4 }}
+  seed_inductive_reasoner.json: |
+{{ .Files.Get "seed_vault/logic/seed_inductive_reasoner.json" | indent 4 }}
+  seed_intuitive_reasoner.json: |
+{{ .Files.Get "seed_vault/logic/seed_intuitive_reasoner.json" | indent 4 }}
+  seed_monotonic.json: |
+{{ .Files.Get "seed_vault/logic/seed_monotonic.json" | indent 4 }}
+  seed_nonmonotonic.json: |
+{{ .Files.Get "seed_vault/logic/seed_nonmonotonic.json" | indent 4 }}
+  seed_ockhams_filter.json: |
+{{ .Files.Get "seed_vault/logic/seed_ockhams_filter.json" | indent 4 }}
+  seed_paradoxes.json: |
+{{ .Files.Get "seed_vault/logic/seed_paradoxes.json" | indent 4 }}
+  seed_proverbs.json: |
+{{ .Files.Get "seed_vault/ethics/seed_proverbs.json" | indent 4 }}
+  seed_hedonic_reflex.json: |
+{{ .Files.Get "seed_vault/ethics/seed_hedonic_reflex.json" | indent 4 }}
+  SeedVault-Physics-Constants-1.1.0.json: |
+{{ .Files.Get "seed_vault/physics/SeedVault-Physics-Constants-1.1.0.json" | indent 4 }}
+  seedvault-units-measurements-1.1.0.json: |
+{{ .Files.Get "seed_vault/physics/seedvault-units-measurements-1.1.0.json" | indent 4 }}
+  vault_biology_reference.json: |
+{{ .Files.Get "seed_vault/reference/vault_biology_reference.json" | indent 4 }}
+  vault_geo_reference.json: |
+{{ .Files.Get "seed_vault/reference/vault_geo_reference.json" | indent 4 }}
+  vault_history_reference.json: |
+{{ .Files.Get "seed_vault/reference/vault_history_reference.json" | indent 4 }}
+  vault_math_reference.json: |
+{{ .Files.Get "seed_vault/reference/vault_math_reference.json" | indent 4 }}
+  vault_physics_reference.json: |
+{{ .Files.Get "seed_vault/reference/vault_physics_reference.json" | indent 4 }}
+  vault_psych_reference.json: |
+{{ .Files.Get "seed_vault/reference/vault_psych_reference.json" | indent 4 }}

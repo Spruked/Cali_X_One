@@ -1,0 +1,23 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: skg-api-slo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: skg-api
+  minReplicas: 3
+  maxReplicas: 50
+  metrics:
+  - type: Object
+    object:
+      metric:
+        name: skg_p95_latency
+      describedObject:
+        apiVersion: v1
+        kind: Service
+        name: skg-api
+      target:
+        type: Value
+        value: "500m"  # 500ms

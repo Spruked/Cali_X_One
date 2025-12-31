@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+numpy
+torch
+networkx
+scikit-learn
+pybreaker
+kafka-python
+boto3
+mlflow
+strawberry-graphql
+psycopg2-binary
+redis

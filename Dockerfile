@@ -28,8 +28,9 @@ COPY . .
 # Create necessary directories
 RUN mkdir -p /app/logs /app/data /app/seed_vault
 
+
 # Set environment variables for SKG
-ENV PYTHONPATH=/app:/app/skg-core:$PYTHONPATH
+ENV PYTHONPATH="/app:/app/skg-core"
 ENV SKG_DB_PATH=/app/data/skg.db
 
 # Expose ports (8003 for main service, 8004 for SKG service)

@@ -1,1 +1,0 @@
-# Test suite for Cali X One - SKG Implementation

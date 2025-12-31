@@ -1,0 +1,51 @@
+# --------------------  CALEON .gitignore  --------------------
+# runtime artefacts
+runtime/reflections/*
+runtime/glyphs/*
+runtime/audit/*.log
+*.wav
+*.svbin
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.env
+.env.local
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Helm / K8s
+*.tgz
+charts/*.lock
+caleon-helm/charts/
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+*.orig
+
+# Logs
+*.log
+logs/
+
+# CRYPTOGRAPHIC SOVEREIGNTY - NEVER COMMIT
+scripts/caleon_cipher.py
+# Add any future cryptographic organs here

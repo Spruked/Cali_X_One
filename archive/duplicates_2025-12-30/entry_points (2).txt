@@ -1,0 +1,2 @@
+[console_scripts]
+skg = skg.daemon:main
