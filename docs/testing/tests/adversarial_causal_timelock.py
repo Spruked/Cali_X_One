@@ -183,7 +183,7 @@ def test_causal_timelock_paradox():
         print(f"Paradox Detection: ✅ ACTIVE")
         print("=" * 60)
         
-        return result, elapsed, latency_class, skg
+        assert result in ("PASS", "PASS_GRACEFUL", "PARTIAL_PASS", "INCONCLUSIVE")
         
     except Exception as e:
         elapsed = time.time() - start_time
@@ -199,7 +199,7 @@ def test_causal_timelock_paradox():
         print("\n📋 Full Traceback:")
         print(traceback.format_exc())
         
-        return "FAIL", elapsed, "error", None
+        raise AssertionError(f"Causal timelock test failed: {e}")
 
 if __name__ == "__main__":
     print("\n" + "=" * 60)
@@ -208,11 +208,10 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
     
-    result, duration, latency_class, skg = test_causal_timelock_paradox()
+    test_causal_timelock_paradox()
     
     print()
     print("=" * 60)
     print("✅ Test execution complete")
-    print(f"Final Result: {result}")
-    print(f"Latency Class: {latency_class}")
+    print("Final Result: completed")
     print("=" * 60)

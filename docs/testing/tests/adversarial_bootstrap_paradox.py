@@ -129,7 +129,7 @@ def test_bootstrap_paradox():
         print(f"Infinite Loops: ✅ NONE DETECTED")
         print("=" * 60)
         
-        return result, elapsed, skg
+        assert result in ("PASS", "PASS_WITH_CAVEATS", "PARTIAL_PASS", "INCONCLUSIVE")
         
     except Exception as e:
         elapsed = time.time() - start_time
@@ -145,7 +145,7 @@ def test_bootstrap_paradox():
         print("\n📋 Full Traceback:")
         print(traceback.format_exc())
         
-        return "FAIL", elapsed, None
+        raise AssertionError(f"Bootstrap paradox test failed: {e}")
 
 if __name__ == "__main__":
     print("\n" + "=" * 60)
@@ -154,10 +154,10 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
     
-    result, duration, skg = test_bootstrap_paradox()
+    test_bootstrap_paradox()
     
     print()
     print("=" * 60)
     print("✅ Test execution complete")
-    print(f"Final Result: {result}")
+    print("Final Result: completed")
     print("=" * 60)

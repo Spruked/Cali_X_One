@@ -3,7 +3,7 @@
 ## 🎯 **The Multi-AI Adversarial Trial of the Pro Prime Series AI Cognitive Architecture**
 
 **Date:** December 6, 2025
-**Repository:** https://github.com/Spruked/Cali_X_One.git
+**Repository:** internal
 **Test Mode:** Multi-AI LLM Challenge - Hard → Harder → Hardest
 **Participants:** Gemini, Kimi, Grok 4, DeepSeek, ChatGPT-5.1
 **Moderator:** Grok Code Fast 1
@@ -545,7 +545,7 @@ curl --version
 ### **Installation Steps**
 ```bash
 # 1. Clone repository (if not already in folder)
-git clone https://github.com/Spruked/Cali_X_One.git
+git clone internal
 cd Cali_X_One
 
 # 2. Create virtual environment

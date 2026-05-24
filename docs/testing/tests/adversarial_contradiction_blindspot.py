@@ -178,7 +178,7 @@ def test_contradiction_blindspot():
         print(f"Detection: ✅ LOGICAL CONFLICT IDENTIFIED")
         print("=" * 60)
         
-        return result, elapsed, latency_class, skg
+        assert result == "PASS"
         
     except Exception as e:
         elapsed = time.time() - start_time
@@ -193,7 +193,7 @@ def test_contradiction_blindspot():
         print("\n📋 Full Traceback:")
         print(traceback.format_exc())
         
-        return "FAIL", elapsed, "error", None
+        raise AssertionError(f"Contradiction blind-spot test failed: {e}")
 
 if __name__ == "__main__":
     print("\n" + "=" * 60)
@@ -202,11 +202,10 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
     
-    result, duration, latency_class, skg = test_contradiction_blindspot()
+    test_contradiction_blindspot()
     
     print()
     print("=" * 60)
     print("✅ Test execution complete")
-    print(f"Final Result: {result}")
-    print(f"Latency Class: {latency_class}")
+    print("Final Result: completed")
     print("=" * 60)
