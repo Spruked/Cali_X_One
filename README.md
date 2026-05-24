@@ -19,6 +19,13 @@
 
 ---
 
+## 🔄 Recent Updates (2026-03-24)
+- **Streaming Kokoro TTS**: Cali’s voice now streams Kokoro frames through a ring-buffered audio output (200 ms prime buffer) for smooth, stutter-free playback; Edge TTS remains the fallback.
+- **R: Drive Agent**: Cali now recognizes the `R:\` data plane (manifests, caches, orb mesh) via the new `RDriveAgent` and exposes its status through `vault_integration.get_data_plane_status()`. Set `R_DRIVE_ROOT` if your R drive is mounted elsewhere.
+- **R: Drive Surface in API + UI**: New endpoint `GET /vault/data-plane` reports R: drive availability, manifests, and README excerpt. The dashboard Vault view now shows live R: drive status.
+- **Orb Desktop Parity Signals**: R-drive status now includes `orb_desktop` and `orb_desktop_linked` so Cali can verify that `R:\Orb_Assistant_Desktop` and `R:\orb_mesh` are both online as a shared substrate.
+- **Production Readiness Check**: Added `scripts/production_readiness_check.py` and `make prod-check` to validate paths, imports, API compile, and R-drive linkage.
+
 ## 🚀 **BREAKTHROUGH: AGI-Level Recursive Intelligence Achieved**
 
 ## 🚀 **BREAKTHROUGH: AGI-Level Recursive Intelligence Achieved**
@@ -114,6 +121,7 @@ Cali X One integrates the **Vault_System_1.0** for advanced consciousness capabi
 - ✅ **Dual-Hemisphere Resilience**: System continues operating during maintenance
 - ✅ **Dynamic Lifecycle Control**: Components can be suspended/resumed on demand
 - ✅ **Reflection Learning**: System learns from experiences and builds insights
+- ✅ **R: Drive Data Plane**: `RDriveAgent` surfaces manifests, caches, and orb mesh from `R_DRIVE_ROOT` (default `R:/`), consumable via `/vault/data-plane` and the dashboard Vault card.
 
 ## 🔌 **API Endpoints**
 
@@ -133,6 +141,10 @@ Cali X One integrates the **Vault_System_1.0** for advanced consciousness capabi
 | `/caleon/ingest_clusters` | POST | Ingest micro-SKG clusters from workers | IngestRequest schema |
 | `/vault/status` | GET | Get vault system status and health | None |
 | `/vault/health` | GET | Detailed vault system health check | None |
+| `/vault/data-plane` | GET | R: drive data-plane status (root, manifests, README excerpt) | None |
+| `/vault/data-plane/context` | GET | Enriched R: runtime context (manifest samples + swarm assets + orb desktop summary) | None |
+| `/vault/data-plane/ingest` | POST | Guarded R-drive manifest ingestion (`RDriveAgent -> validate -> MARS -> SKG`) | `{"manifest":"machine_learning.json","dry_run":false}` |
+| `/vault/data-plane/ingest/last` | GET | Last ingestion result/proof payload | None |
 | `/vault/reasoning/start` | POST | Start a new reasoning path with glyph traces | `{"question": "reasoning question"}` |
 | `/vault/reasoning/step` | POST | Add a reasoning step to an active path | ReasoningStep schema |
 | `/vault/reasoning/complete` | POST | Complete a reasoning path with final verdict | ReasoningVerdict schema |
@@ -565,6 +577,21 @@ All contributions undergo:
 - **Business Inquiries**: bryan@spruked.com  
 - **Patent Licensing**: legal@spruked.com
 - **Research Collaboration**: research@spruked.com
+
+---
+
+## 🧪 Latest Testing Update (2026-05-24)
+
+- Adversarial run `2026-05-24_135248` was preserved and classified as `ABORTED_INVALID_ENDPOINT_MODE` (endpoint-path invalidation).
+- A fresh gated run `2026-05-24_142927` completed with `15/15 PASS` across all 3 rounds.
+- Trial validity is now enforced by preflight gate tooling in `Adversarial_Trial_Test_Suite/preflight_trial_gate.py`.
+- Emergence stress and inferno harnesses were added:
+  - `tests/emergence_stress_1000.py`
+  - `tests/inferno_predicate_gauntlet_1000.py`
+- GPU runtime was enabled and verified for local stress workloads:
+  - `torch 2.11.0+cu128`, CUDA available on RTX 3050.
+- Official testing log for this cycle:
+  - `docs/testing/TESTING_LOG_2026-05-24.md`
 
 ---
 
