@@ -1,0 +1,64 @@
+# DEV.LOG
+
+## 2026-05-24 - Adversarial Trial + Emergence Stress + GPU Enablement
+
+### Summary
+- Implemented and integrated DSAE semantic enrichment into API reasoning flow.
+- Diagnosed invalid trial condition (echo-mode endpoint), preserved invalidation evidence, then fixed endpoint behavior.
+- Added adversarial trial preflight gate and strict-mode controls.
+- Executed full adversarial trial run `2026-05-24_142927` with complete 15/15 pass and preserved artifacts.
+- Added emergence stress harnesses and ran GPU enablement workflow.
+- Added Inferno gauntlet harness and invention dedupe/cap controls.
+
+### Key Code Changes
+- `iss_module/cali_x_one/semantic/dsae.py` added.
+- `iss_module/cali_x_one/semantic/__init__.py` added.
+- `iss_module/api/api.py` updated:
+  - DSAE wiring
+  - `/api/query` non-echo adjudication response
+  - strict mode guard for in-memory test endpoints
+- `Adversarial_Trial_Test_Suite/preflight_trial_gate.py` added.
+- `Adversarial_Trial_Test_Suite/setup_trial_run.py` updated with mandatory preflight.
+- `run_agi_tests.py` fixed (`--seed=42` removed).
+- `docs/testing/tests/adversarial_bootstrap_paradox.py` updated.
+- `docs/testing/tests/adversarial_causal_timelock.py` updated.
+- `docs/testing/tests/adversarial_contradiction_blindspot.py` updated.
+- `enhancements/tests/test_rod_cycle_smoke.py` renamed to `enhancements/tests/test_rod_cycle_smoke_enhancements.py`.
+- `tests/emergence_stress_1000.py` added and iterated.
+- `tests/inferno_predicate_gauntlet_1000.py` added.
+- `skg-core/skg/core.py` updated with GPU-backed proposal path (CUDA if available).
+- `skg-core/skg/invent_predicate.py` updated with dedupe + per-call cap.
+
+### Trial Operations Record
+- Invalid run preserved:
+  - `Adversarial_Trial_Test_Suite/runs/2026-05-24_135248`
+  - classified: `ABORTED_INVALID_ENDPOINT_MODE`
+- Valid run completed:
+  - `Adversarial_Trial_Test_Suite/runs/2026-05-24_142927`
+  - Round 1: 5/5 PASS
+  - Round 2: 5/5 PASS
+  - Round 3: 5/5 PASS
+  - Total: 15/15 PASS
+
+### Emergence/Inferno Notes
+- Emergence stress runs showed burst/churn pattern:
+  - long zero-add stretches
+  - burst edge injection during cluster predicate commits
+- Structural density interpreted as connectivity pressure, not semantic quality.
+- GPU stack enabled successfully in `.venv`:
+  - `torch 2.11.0+cu128`
+  - `cuda 12.8`
+  - `torch.cuda.is_available() == True`
+  - `NVIDIA GeForce RTX 3050` detected
+- Observed workload remains mixed CPU/GPU due to networkx/scipy-heavy graph operations.
+
+### Artifacts
+- Adversarial run logs:
+  - `Adversarial_Trial_Test_Suite/runs/2026-05-24_142927/*`
+- Session records:
+  - `Adversarial_Trial_Test_Suite/runs/2026-05-24_135248/SESSION_RECORD_2026-05-24.*`
+- GPU monitor log:
+  - `predicate_emergence_gpu_watch.log`
+- Test outputs:
+  - `test_results/` (including emergence/inferno JSON artifacts)
+
